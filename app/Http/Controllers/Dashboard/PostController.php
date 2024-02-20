@@ -8,9 +8,11 @@ use inertia\inertia;
 
 class PostController extends Controller
 {
-    public function index()
+    public function Index()
     {
-        return inertia::render('Dashboard/post/index') ;
+        return inertia::render('Dashboard/Post/Index') ;
+        
+       
     }
     
 }

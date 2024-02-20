@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('text') ->nullable();
 
             $table->enum('posted', ['yes','not'])->default('not');
-            $table->enum('type', ['adverd','post','course','movie'])->default('not');
+            $table->enum('type', ['adverd','post','course','movie']);
 
             $table->foreignId('category_id') ->constrained()->onDelete('cascade');
 

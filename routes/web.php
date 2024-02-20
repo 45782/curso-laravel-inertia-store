@@ -1,9 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategoryController;
-use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,24 +21,24 @@ use Inertia\Inertia;
      return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
-         'laravelVersion' => Application::VERSION,
+        'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
    ]);
  });
-
- Route::middleware([
-     'auth:sanctum',
+  
+Route::middleware([
+    'auth:sanctum',
     config('jetstream.auth_session'),
-     'verified',
- ])->group(function () {
-     Route::get('/dashboard', function () {
-         return Inertia::render('Dashboard');
-     })->name('dashboard');
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
 
-     Route::resource('category', CategoryController::class)->only(['create']); });
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('create');    
+    Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit'); 
+    Route::get('/category/index', [CategoryController::class, 'index'])->name('index');    
 
-
- 
- 
+});
 
 
