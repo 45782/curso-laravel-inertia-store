@@ -14,8 +14,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::paginate();
-      
-        return inertia("Dashboard/Category/Index",compact("categories"));
+        return inertia("Dashboard/Category/Index", compact("categories"));
         // return response()->json($categories);
     }
 
@@ -26,7 +25,8 @@ class CategoryController extends Controller
 
     public function store(Store $request)
     {
-       Category::create($request->validate());       
+        Category::create($request->validated());
+        return to_route('category.index')->with('message', "Create category succesfully");
     }
     
     public function edit(Category $category)
@@ -34,10 +34,13 @@ class CategoryController extends Controller
         // sleep(3);
         return inertia("Dashboard/Category/Edit", compact('category'));
     }
+
     public function update(Request $request,Category $category)
     {
         $category->update($request->validated());
     }
-
-    
+    public function destroy(Category $category)
+    {
+        $category->delete();
+    }
 }

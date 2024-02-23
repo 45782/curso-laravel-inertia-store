@@ -35,9 +35,11 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('create');    
-    Route::get('/category/edit', [CategoryController::class, 'edit'])->name('edit'); 
-    Route::get('/category/index', [CategoryController::class, 'index'])->name('index');    
+    Route::get('/category/create', [CategoryController::class, 'create'])->name('create');
+    Route::get('/category/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
+    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+    Route::post('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 });
 
