@@ -26,7 +26,8 @@ class CategoryController extends Controller
     public function store(Store $request)
     {
         Category::create($request->validated());
-        return to_route('category.index')->with('message', "Create category succesfully");
+        return to_route('category.index')->with('message', "Created category succesfully");
+    
     }
     
     public function edit(Category $category)
@@ -35,12 +36,14 @@ class CategoryController extends Controller
         return inertia("Dashboard/Category/Edit", compact('category'));
     }
 
-    public function update(Request $request,Category $category)
+    public function update( Request $request,Category $category)
     {
         $category->update($request->validated());
+        return  redirect()->route('category.index')-> with('message,"Updatep category successfully');
     }
     public function destroy(Category $category)
     {
         $category->delete();
+        return to_route ('category.index')-> with('message,"delete category successfully');;
     }
 }

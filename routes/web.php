@@ -39,7 +39,7 @@ Route::middleware([
     Route::get('/category/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
     Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-    Route::post('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::delete('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
 
 });
 
