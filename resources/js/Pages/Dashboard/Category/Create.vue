@@ -65,9 +65,7 @@ export default {
     const form = useForm({
       title: null,
       slug: null,
-
     }
-
 
     )
     function submit() {

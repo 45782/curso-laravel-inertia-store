@@ -6,7 +6,7 @@
       <template #form>
         <div class="col-span-6">
           <InputLabel> Title </InputLabel>
-          <TextInput class="w-full" v-model="form.title" />
+          <TextInput class="w-full" v-model="form.title" ></TextInput> 
           <InputError :message="errors.title" />
         </div>
         <div class="col-span-6">
@@ -14,6 +14,7 @@
           <TextInput class="w-full" type="text" v-model="form.slug" />
           <InputError :message="errors.slug" />
         </div>
+    
           <PrimaryButton type="submit">Send </PrimaryButton>
       </template>
     </FormSection>

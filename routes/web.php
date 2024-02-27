@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Dashboard\CategoryController;
+use App\Http\Controllers\Dashboard\PostController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -35,11 +36,18 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/category/create', [CategoryController::class, 'create'])->name('create');
-    Route::get('/category/edit', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::get('/category/index', [CategoryController::class, 'index'])->name('category.index');
-    Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
-    Route::delete('/category/destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+    Route::prefix('category')->namespace('Category')->group(function() {
+        Route::get('create', [CategoryController::class, 'create'])->name('create');
+        Route::get('index', [CategoryController::class, 'index'])->name('category.index');
+        Route::get('edit/{category}', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::post('store', [CategoryController::class, 'store'])->name('category.store');
+        Route::delete('destroy', [CategoryController::class, 'destroy'])->name('category.destroy');
+    });
+    Route::get('Post', [PostController::class, 'Create'])->name('post.create');
+    Route::post('store', [PostController::class, 'store'])->name('post.store');
+    Route::get('index', [PostController::class, 'index'])->name('post.index');
+    Route::get('edit/{post}', [PostController::class, 'edit'])->name('post.edit');
+
 
 });
 
