@@ -23,7 +23,12 @@
         </div>
         <div class="col-span-6">
           <InputLabel value="Text" />
-          <TextInput class="rounded-md w-full border-gray-400" type="text" v-model="form.text" />
+          <!-- <TextInput class="rounded-md w-full border-gray-400" type="text" v-model="form.text" /> -->
+          <ckeditor
+          :editor="editor.editor"
+          v-model="form.text"
+          >
+        </ckeditor>
           <InputError :message="errors.text" />
         </div>
         <div class="col-span-6">

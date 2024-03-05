@@ -11,6 +11,8 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 //ORUGA
 import Oruga from '@oruga-ui/oruga-next';
 import '@oruga-ui/theme-oruga/dist/scss/oruga-full.scss';
+import CKEditor from '@ckeditor/ckeditor5-vue';
+
 
 
 
@@ -21,8 +23,10 @@ createInertiaApp({
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(Oruga)
+            .use(CKEditor)
             .use(ZiggyVue)
             .mount(el);
+
     },
     progress: {
         color: '#4B5563',
