@@ -59,9 +59,6 @@ setup(props) {
     id:props.category.id,
     title: props.category.title,
     slug: props.category.slug,
-    
-    
-    
   });
 
   function submit() {

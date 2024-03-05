@@ -51,18 +51,12 @@
                                     :href="route('post.edit', category.id)">
                                 Edit
                                 </Link>
-                                <Link method="DELETE" class="text-sm mr-4 text-red-400 hover:text-red-700"
-                                    :href="route('post.store', category.id)">
-                                Delete
-                                </Link>
+                                <Link as="button" type="button" method="DELETE" class="text-sm text-red-400 hover:text-red-700 ml-2" :href="route('posts.destroy', category.id)">Delete</Link>
+
                             </th>
                         </tr>
                     </tbody>
-                    <!-- <template v-for="l in categories.links" :key="l">
-            <Link v-if="!l.active" class="px-2 py-1" :href="l.url" v-html="l.label"/>
-            <span v-else class="px-2 py-1 cursor-pointer text-gray-500"  v-html="l.label"  />
-        </template> -->
-
+                 
                     <Link>
                     </Link>
                 </table>

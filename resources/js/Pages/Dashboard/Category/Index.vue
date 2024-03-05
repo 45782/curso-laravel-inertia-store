@@ -49,10 +49,8 @@
                                     <Link class="text-sm mr-4 text-purple-400 hover:text-purple-700"
                                         :href="route('category.edit', category.id)">
                                         Edit
-                                    </Link>
-                                    <button @click="deleteCategory(category.id)" class="text-sm mr-4 text-red-400 hover:text-red-700">
-                                        Delete
-                                    </button>
+                                    </Link >
+                                    <Link as="button" type="button" method="DELETE" class="text-sm text-red-400 hover:text-red-700 ml-2" :href="route('category.destroy', category.id)">Delete</Link>
                                 </th>
                             </tr>
                         </tbody>
@@ -75,7 +73,6 @@ import Pagination from "@/Shared/Pagination.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
 import AppLayout from '@/Layouts/AppLayout.vue';
-import axios from "axios";
 
 export default {
     components: {
@@ -87,19 +84,11 @@ export default {
         categories: Object,
     },
     methods: {
-        deleteCategory(id) {
-            axios.delete("destroy",{
-                params: {id}
-            })
-            .then(response => {
-                console.log(response.data);
-                alert('Categoría eliminada exitosamente.' + response.data);
-                // Aquí puedes actualizar tu lista de categorías o hacer cualquier otra acción necesaria.
-            })
-            .catch(error => {
-                alert('Error al eliminar la categoría: ' + error);
-            });
-        }
-    }
-}
+    deleteCategory() {
+      Inertia.delete(route("category.destroy", this.deleteCategoryRow));
+      this.confirmDeleteActive = false;
+            
+        },
+    },
+};
 </script>

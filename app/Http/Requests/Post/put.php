@@ -30,9 +30,16 @@ class put extends FormRequest
      */
     public function rules(): array
     {
+        $postId = $this->route("post") ? $this->route("post")->id : null;
         return [
             "title" => "required|min:5|max:255",
-            "slug" => "required|min:5|max:255|unique:categories,slug".$this->route("category")->id,
+            "slug" => "required|min:5|max:255|unique:posts,slug," . $postId,
+            "date" => "required",
+            "description" => "required",
+            "text" => "required",
+            "posted" => "required",
+            "type" => "required",
+            "category_id" => "required"
         ];
     }
 }

@@ -1,6 +1,6 @@
 <template>
-  <app-layout >
-      <FormSection @submitted="submit" class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+  <app-layout>
+    <FormSection @submitted="submit" class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
       <template #title> Create post </template>
       <template #description> Create a post </template>
       <template #form>
@@ -68,6 +68,23 @@
       </template>
     </FormSection>
 
+    <div class="container max-w-screen-xl">
+      <div class="card">
+        <div class="card-body">
+          <div class="grip gripd-cols-2 gap-2">
+          <InputLabel value="image" />
+          <TextInput class="w-full h-8" type="file" @input="form.image = $event.target.files[0]" v-model="form.image" />
+          <InputError :message="errors.image" />
+          <PrimaryButton @click="upload"> Send</PrimaryButton>
+
+         </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
   </app-layout>
 </template>
 
@@ -78,17 +95,16 @@ import { useForm } from "@inertiajs/inertia-vue3";
 // import AppLayout from "../../../Layouts/AppLayout"
 import AppLayout from "@/Layouts/AppLayout.vue";
 
- 
-
-
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import FormSection from "@/Components/FormSection.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { watch } from "vue";
+import { router } from "@inertiajs/vue3";
 
 export default {
-components: {
+  components: {
     AppLayout,
     // JetInput,
     InputError,
@@ -97,38 +113,45 @@ components: {
     FormSection,
     TextInput,
     InputError
-},
-props: {
-  errors: Object,
-  post:Object,
-  categories: Object,
-},
-setup(props) {
-  const form = useForm({
-    id:props.post.id,
-    title: props.post.title,
-    slug: props.post.slug,
-    date: props.post.date,
-    description: props.post.description,
-    text: props.post.text,
-    type: props.post.type,
-    posted: props.post.posted,
-    type: props.post.type,
-    category_id: props.post.category_id,
+  },
+  props: {
+    errors: Object,
+    post: Object,
+    categories: Object,
+  },
+  setup(props) {
+    const form = useForm({
+      id: props.post.id,
+      title: props.post.title,
+      slug: props.post.slug,
+      date: props.post.date,
+      description: props.post.description,
+      text: props.post.text,
+      type: props.post.type,
+      posted: props.post.posted,
+      type: props.post.type,
+      category_id: props.post.category_id,
+      image: "",
+    });
 
+    function submit() {
+      Inertia.put(route("post.update", form.id), form);
+    }
 
+    function upload() {
+      Inertia.post(route("post.upload", form.id), form);
+    }
+    const dropFiles =ref([]);
 
-
-    
-    
-    
-  });
-
-  function submit() {
-    Inertia.put(route("post.update",form.id), form);
-  }
-
-  return { form, submit };
-},
+    watch(() =>dropFiles, (currentValue, oldValue) =>{
+      router.post(route("post.uplosd", props.post.id),{
+        "image": currentValue.value[currentValue.value.length-1]
+      });
+    },
+            
+       {deep: true});
+       
+    return { form, submit, upload };
+  },
 };
 </script>

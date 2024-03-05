@@ -44,6 +44,7 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        //  return  "hola mundo";
         $category->delete();
         return Redirect::route('category.index')->with('message', "Categoría eliminada correctamente.");
     }
